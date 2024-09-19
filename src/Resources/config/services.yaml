@@ -1,0 +1,37 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+
+
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    bind:
+        # pass this value to any $projectDir argument for any service
+        # that's created in this file (including controller arguments)
+        string $projectDir: '%kernel.project_dir%'
+    
+  
+  WeCanSync\MultiTenancyBundle\Service\TenantService:
+    autowire: true
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    bind:
+        # pass this value to any $projectDir argument for any service
+        # that's created in this file (including controller arguments)
+        string $tenantEntity: '%wecansync.tenant_entity%'
+
+  WeCanSync\MultiTenancyBundle\Service\ConfigurationGeneratorService:
+    arguments:
+      $container: '@service_container'
+
+  WeCanSync\MultiTenancyBundle\Command\CreateDbCommand:
+  WeCanSync\MultiTenancyBundle\Command\MigrateDbCommand:
+  WeCanSync\MultiTenancyBundle\Command\SeedsCommand:
+
+    
+  
+            
+  # add more service definitions when explicit configuration is needed
+  # please note that last definitions always *replace* previous ones

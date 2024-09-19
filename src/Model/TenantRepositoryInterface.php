@@ -1,0 +1,12 @@
+<?php
+
+namespace WeCanSync\MultiTenancyBundle\Model;
+
+/**
+ * Implement this class on any Tenant entity items to identify the entity for selecting entity managers.
+ */
+interface TenantRepositoryInterface
+{
+    public function findByIdentifier($identifier);
+    public function findBySubdomain($identifier);
+}
